@@ -10,9 +10,9 @@ variable "business_unit" {
 }
 /*
 variable "linux_vm_size" {
-  type        = string
+  type        = list(string)
   description = "Size of the Virtual Machine"
-  default     = "Standard_B2ats_v2"
+  default     = ["Standard_B2ats_v2", "Standard_B2ts_v2"]
 }
 
 variable "location" {

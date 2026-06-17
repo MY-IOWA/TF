@@ -8,10 +8,10 @@ az ad sp create-for-rbac --name "my-app-sp" --role Contributor --scopes "//subsc
   "password": "MCj8Q~c-xT6xKxgpLj9T3xsMOVvhkgPCzzcnCa-j",
   "tenant": "a1de93d5-ae36-4121-bf1e-c6d2842e5171"
 
-ARM_CLIENT_ID=
-ARM_CLIENT_SECRET=
-ARM_TENANT_ID=
-ARM_SUBSCRIPTION_ID=
+ARM_CLIENT_ID = ed1b5684-0866-4873-926f-cfc0fe9467b0
+ARM_CLIENT_SECRET = MCj8Q~c-xT6xKxgpLj9T3xsMOVvhkgPCzzcnCa-j
+ARM_TENANT_ID = a1de93d5-ae36-4121-bf1e-c6d2842e5171
+ARM_SUBSCRIPTION_ID =
 
 az login --service-principal -u ed1b5684-0866-4873-926f-cfc0fe9467b0 -p MCj8Q~c-xT6xKxgpLj9T3xsMOVvhkgPCzzcnCa-j --tenant a1de93d5-ae36-4121-bf1e-c6d2842e5171
 

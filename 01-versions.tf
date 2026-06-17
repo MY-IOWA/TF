@@ -4,7 +4,7 @@ terraform {
     workspaces {
       name = "Main"
     }*/
-  
+
   backend "azurerm" {
     resource_group_name  = "Terraform"
     storage_account_name = "terraformstorageindia"
@@ -12,7 +12,7 @@ terraform {
     key                  = "terraform.tfstate"
   }
   required_version = "~>1.12.0"
-    required_providers {
+  required_providers {
     azurerm = {
       source  = "azurerm"
       version = ">=4.66.0"

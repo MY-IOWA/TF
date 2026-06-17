@@ -1,7 +1,0 @@
-{
-	"/subscriptions/307d7ff5-4e27-4cf0-b4df-f262f08102e7/resourceGroups/rg-AF": {
-		"resource_id": "/subscriptions/307d7ff5-4e27-4cf0-b4df-f262f08102e7/resourceGroups/rg-AF",
-		"resource_type": "azurerm_resource_group",
-		"resource_name": "res-0"
-	}
-}

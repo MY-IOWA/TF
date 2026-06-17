@@ -16,7 +16,6 @@ resource "azurerm_storage_container" "container1" {
 resource "azurerm_storage_blob" "blob1" {
   for_each             = local.location_code
   name                 = lower("blob-${local.naming_suffix}")
-  storage_account_name   = azurerm_storage_account.st_name[each.key].name
   storage_container_id = azurerm_storage_container.container1[each.key].id
   type                 = "Block"
   source_content       = "This is a sample blob content for ${local.naming_suffix}"

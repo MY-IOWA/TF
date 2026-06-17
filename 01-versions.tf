@@ -2,7 +2,7 @@ terraform {
   backend "remote" {
     organization = "MK-IOWA-TEST"
     workspaces {
-      name = "TF-VCS"
+      name = "TF"
     }
   }
 /*

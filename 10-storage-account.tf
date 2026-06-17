@@ -19,4 +19,4 @@ resource "azurerm_storage_blob" "blob1" {
   storage_container_id = azurerm_storage_container.container1[each.key].id
   type                 = "Block"
   source_content       = "This is a sample blob content for ${local.naming_suffix}"
-}*/
+}*/ 

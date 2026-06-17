@@ -5,7 +5,7 @@ provider "azurerm" {
   tenant_id       = "a1de93d5-ae36-4121-bf1e-c6d2842e5171"
   subscription_id = "307d7ff5-4e27-4cf0-b4df-f262f08102e7"
 }
-
+/*
 resource "random_string" "random4" {
   length  = 4
   lower   = true
@@ -27,3 +27,4 @@ resource "random_string" "random8" {
   numeric = true
   special = false
 }
+*/

@@ -6,8 +6,8 @@ terraform {
     }*/
   
   backend "azurerm" {
-    resource_group_name  = "Terraform-Main"
-    storage_account_name = "storagescm71pke"
+    resource_group_name  = "Terraform"
+    storage_account_name = "terraformstorageindia"
     container_name       = "tfstate"
     key                  = "terraform.tfstate"
   }

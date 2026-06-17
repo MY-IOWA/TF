@@ -11,6 +11,7 @@ locals {
   # 3. Perform your lookup and naming suffix generation
   naming_suffix = "${local.location[0].business_unit}-${local.location[0].environment}"
 }
+
 /*[
     { code = "AF", location = "southafricanorth" },
     { code = "AE", location = "australiaeast" },

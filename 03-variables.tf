@@ -1,3 +1,4 @@
+/*
 variable "environment" {
   type        = list(string)
   description = "Deployment Environment (e.g., dev, staging, prod)"
@@ -8,7 +9,7 @@ variable "business_unit" {
   description = "Business Unit (e.g., finance, hr, it)"
   default     = ["HR", "FIN", "IT"]
 }
-/*
+
 variable "linux_vm_size" {
   type        = list(string)
   description = "Size of the Virtual Machine"

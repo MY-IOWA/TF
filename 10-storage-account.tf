@@ -1,4 +1,4 @@
-/*resource "azurerm_storage_account" "st_name" {
+resource "azurerm_storage_account" "st_name" {
   for_each                 = local.location_code
   name                     = substr("storage${random_string.random6.result}${local.location[0].location}", 0, 20)
   resource_group_name      = azurerm_resource_group.rg[each.key].name
@@ -19,4 +19,4 @@ resource "azurerm_storage_blob" "blob1" {
   storage_container_id = azurerm_storage_container.container1[each.key].id
   type                 = "Block"
   source_content       = "This is a sample blob content for ${local.naming_suffix}"
-}*/
+}

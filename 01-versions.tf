@@ -1,11 +1,12 @@
 terraform {
+  /*
   backend "remote" {
     organization = "MK-IOWA-TEST"
     workspaces {
       name = "TF"
     }
   }
-/*
+
   backend "azurerm" {
     resource_group_name  = "Terraform"
     storage_account_name = "terraformstorageindia"
@@ -13,7 +14,7 @@ terraform {
     key                  = "terraform.tfstate"
   }
   */
-  
+
   required_version = "~>1.12.0"
   required_providers {
     azurerm = {

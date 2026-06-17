@@ -13,6 +13,7 @@ terraform {
     key                  = "terraform.tfstate"
   }
   */
+  
   required_version = "~>1.12.0"
   required_providers {
     azurerm = {

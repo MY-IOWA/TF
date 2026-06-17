@@ -1,6 +1,6 @@
 resource "azurerm_storage_account" "st_name" {
   for_each                 = local.location_code
-  name                     = substr("storage${random_string.random8.result}${local.location[0].location}", 0, 24)
+  name                     = substr("storage${random_string.random6.result}${local.location[0].location}", 0, 24)
   resource_group_name      = azurerm_resource_group.rg[each.key].name
   location                 = azurerm_resource_group.rg[each.key].location
   account_tier             = "Standard"

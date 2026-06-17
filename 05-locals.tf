@@ -10,7 +10,7 @@ locals {
   location_code = { for item in local.location : item.location => item.code }
 
   # 3. Perform your lookup and naming suffix generation
-  naming_suffix = "${var.business_unit}-${var.environment}"
+  naming_suffix = "${local.location[0].business_unit}-${local.location[0].environment}"
 }
 
 /*[

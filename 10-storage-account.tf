@@ -5,6 +5,11 @@ resource "azurerm_storage_account" "st_name" {
   location                 = azurerm_resource_group.rg[each.key].location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  lifecycle {
+    ignore_changes = [
+      name
+    ]
+  }
 
 }
 resource "azurerm_storage_container" "container1" {

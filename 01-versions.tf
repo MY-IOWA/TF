@@ -1,5 +1,5 @@
 terraform {
-
+  required_version = "~>1.12.0"
   backend "remote" {
     organization = "MK-IOWA-TEST"
     workspaces {
@@ -14,8 +14,6 @@ terraform {
     key                  = "terraform.tfstate"
   }
   */
-
-  required_version = "~>1.12.0"
   required_providers {
     azurerm = {
       source  = "azurerm"
@@ -32,6 +30,10 @@ terraform {
     time = {
       source  = "hashicorp/time"
       version = ">=0.7.2"
+    }
+    external = {
+      source = "hashicorp/external"
+      version = ">=2.1.0"
     }
   }
 }

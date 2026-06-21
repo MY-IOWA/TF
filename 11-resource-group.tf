@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "rg" {
   for_each = local.location_code
-  name     = "rg-${each.value}"
+  name     = "RG-${each.value}"
   location = each.key
 }

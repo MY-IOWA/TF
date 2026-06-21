@@ -1,7 +1,7 @@
 output "naming_suffix" {
   value       = local.naming_suffix
   description = "The generated naming suffix based on the first location's business unit and environment."
-  sensitive = true
+  sensitive   = true
 }
 /*
 output "location_code_map" {

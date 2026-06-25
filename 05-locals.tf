@@ -1,7 +1,7 @@
 locals {
   # 1. Properly formatted list of objects
   location = [
-    { code = "IN", location = "centralindia", business_unit = ["HR", "FIN", "IT"], environment = ["dev", "prod", "QA", "staging"] },
+    { code = "IN", location = "southindia", business_unit = ["HR", "FIN", "IT"], environment = ["dev", "prod", "QA", "staging"] },
     { code = "AF", location = "southafricanorth", business_unit = ["HR", "FIN", "IT"], environment = ["dev", "prod", "QA", "staging"] },
     { code = "JW", location = "japanwest", business_unit = ["HR", "FIN", "IT"], environment = ["dev", "prod", "QA", "staging"] },
   ]

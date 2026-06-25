@@ -1,5 +1,5 @@
 terraform {
-  required_version = "~>1.12.0"
+  required_version = ">=1.12.0"
   backend "remote" {
     organization = "MK-IOWA-TEST"
     workspaces {
@@ -32,7 +32,7 @@ terraform {
       version = ">=0.7.2"
     }
     external = {
-      source = "hashicorp/external"
+      source  = "hashicorp/external"
       version = ">=2.1.0"
     }
   }

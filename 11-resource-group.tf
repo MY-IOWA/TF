@@ -3,3 +3,8 @@ resource "azurerm_resource_group" "rg" {
   name     = "MyRG-${each.value}"
   location = each.key
 }
+resource "azurerm_resource_group" "AZ400" {
+  name     = "AZ400"
+  location = "centralindia"
+
+}

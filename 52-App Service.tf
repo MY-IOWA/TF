@@ -1,7 +1,7 @@
 resource "azurerm_windows_web_app" "web-app-windows" {
   name                = "web-app-windows"
-  resource_group_name = azurerm_resource_group.AZ400.name
-  location            = azurerm_resource_group.AZ400.location
+  resource_group_name          = values(azurerm_resource_group.rg)[0].name
+  location                     = values(azurerm_resource_group.rg)[0].location
   service_plan_id     = azurerm_service_plan.Service_plan_win.id
   site_config {
     always_on = false

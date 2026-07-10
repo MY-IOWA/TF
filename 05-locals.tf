@@ -6,9 +6,11 @@ locals {
     { code = "JW", location = "japanwest", business_unit = "HR", environment = "dev", cidr = "10.2.0.0/16" },
     { code = "KC", location = "koreacentral", business_unit = "HR", environment = "dev", cidr = "10.3.0.0/16" },
     { code = "AE", location = "australiaeast", business_unit = "HR", environment = "dev", cidr = "10.4.0.0/16" },
-    { code = "SW", location = "swedencentral", business_unit = "HR", environment = "dev", cidr = "10.7.0.0/16" },
-    { code = "CL", location = "chilecentral", business_unit = "HR", environment = "dev", cidr = "10.9.0.0/16" },
-    { code = "MC", location = "mexicocentral", business_unit = "HR", environment = "dev", cidr = "10.10.0.0/16" }
+    { code = "SW", location = "swedencentral", business_unit = "HR", environment = "dev", cidr = "10.5.0.0/16" },
+    { code = "CL", location = "chilecentral", business_unit = "HR", environment = "dev", cidr = "10.6.0.0/16" },
+    { code = "MC", location = "mexicocentral", business_unit = "HR", environment = "dev", cidr = "10.7.0.0/16" },
+    { code = "A1", location = "australiacentral", business_unit = "HR", environment = "dev", cidr = "10.8.0.0/16" },
+    { code = "A2", location = "australiasoutheast", business_unit = "HR", environment = "dev", cidr = "10.9.0.0/16" },
   ]
   # 2. Automatically transform the list into a lookup map: {"southafricanorth" = "AF", ...}
   location_code = { for item in local.location : item.location => item.code }

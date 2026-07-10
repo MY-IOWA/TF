@@ -4,7 +4,7 @@ resource "azurerm_linux_virtual_machine" "linux" {
   name                            = "linuxvm-${local.naming_suffix}-${each.value}"
   resource_group_name             = azurerm_resource_group.rg[each.key].name
   location                        = azurerm_resource_group.rg[each.key].location
-  size                            = "Standard_B2ats_v2"
+  size                            = "Standard_B2als_v2"
   admin_username                  = "mahesh"
   admin_password                  = "Test@123user"
   disable_password_authentication = false

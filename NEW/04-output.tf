@@ -6,6 +6,16 @@ output "naming_suffix" {
 output "Vnet_ID" {
   value = [for MC in azurerm_virtual_network.vnet : MC.id]
 }
+output "client_certificate" {
+  value     = azurerm_kubernetes_cluster.aks_cluster.kube_config[0].client_certificate
+  sensitive = true
+}
+
+output "kube_config" {
+  value     = azurerm_kubernetes_cluster.aks_cluster.kube_config_raw
+  sensitive = true
+}
+
 /*
 output "location_code_map" {
   value       = local.location_code

@@ -21,7 +21,6 @@ resource "azurerm_windows_virtual_machine" "win" {
     version   = "latest"
   }
 }
-
 resource "azurerm_network_interface" "nic-win" {
   count               = 2
   name                = "nic-win-${count.index}"
@@ -34,7 +33,6 @@ resource "azurerm_network_interface" "nic-win" {
     private_ip_address_allocation = "Dynamic"
   }
 }
-
 resource "azurerm_lb" "lb-southafricanorth" {
   name                = "LoadBalancer-southafricanorth"
   location            = azurerm_resource_group.rg["southafricanorth"].location
@@ -79,16 +77,6 @@ resource "azurerm_network_interface_backend_address_pool_association" "nic_lb_as
   ip_configuration_name   = "ipconfig1"
   backend_address_pool_id = azurerm_lb_backend_address_pool.backend_pool_southafricanorth.id
 }
-
-
-resource "azurerm_route" "africa-mexico" {
-  name                   = "africa-mexico"
-  resource_group_name    = azurerm_resource_group.rg["southafricanorth"].name
-  route_table_name       = azurerm_route_table.route_table["southafricanorth"].name
-  address_prefix         = "10.6.0.0/16"
-  next_hop_type          = "VirtualAppliance"
-  next_hop_in_ip_address = "10.0.0.4"
-}
 resource "azurerm_route" "africa-sweden" {
   name                   = "africa-sweden"
   resource_group_name    = azurerm_resource_group.rg["southafricanorth"].name
@@ -97,19 +85,19 @@ resource "azurerm_route" "africa-sweden" {
   next_hop_type          = "VirtualAppliance"
   next_hop_in_ip_address = "10.0.0.4"
 }
+resource "azurerm_route" "africa-mexico" {
+  name                   = "africa-mexico"
+  resource_group_name    = azurerm_resource_group.rg["southafricanorth"].name
+  route_table_name       = azurerm_route_table.route_table["southafricanorth"].name
+  address_prefix         = "10.3.0.0/16"
+  next_hop_type          = "VirtualAppliance"
+  next_hop_in_ip_address = "10.0.0.4"
+}
 resource "azurerm_route" "africa-chile" {
   name                   = "africa-chile"
   resource_group_name    = azurerm_resource_group.rg["southafricanorth"].name
   route_table_name       = azurerm_route_table.route_table["southafricanorth"].name
-  address_prefix         = "10.2.0.0/16"
-  next_hop_type          = "VirtualAppliance"
-  next_hop_in_ip_address = "10.0.0.4"
-}
-resource "azurerm_route" "africa-australia" {
-  name                   = "africa-australia"
-  resource_group_name    = azurerm_resource_group.rg["southafricanorth"].name
-  route_table_name       = azurerm_route_table.route_table["southafricanorth"].name
-  address_prefix         = "10.7.0.0/16"
+  address_prefix         = "10.4.0.0/16"
   next_hop_type          = "VirtualAppliance"
   next_hop_in_ip_address = "10.0.0.4"
 }
@@ -126,6 +114,14 @@ resource "azurerm_route" "africa-korea" {
   resource_group_name    = azurerm_resource_group.rg["southafricanorth"].name
   route_table_name       = azurerm_route_table.route_table["southafricanorth"].name
   address_prefix         = "10.6.0.0/16"
+  next_hop_type          = "VirtualAppliance"
+  next_hop_in_ip_address = "10.0.0.4"
+}
+resource "azurerm_route" "africa-australia" {
+  name                   = "africa-australia"
+  resource_group_name    = azurerm_resource_group.rg["southafricanorth"].name
+  route_table_name       = azurerm_route_table.route_table["southafricanorth"].name
+  address_prefix         = "10.7.0.0/16"
   next_hop_type          = "VirtualAppliance"
   next_hop_in_ip_address = "10.0.0.4"
 }

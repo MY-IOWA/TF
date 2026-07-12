@@ -1,12 +1,22 @@
-# Install IIS Web Server
+# 1. Install IIS Web Server (if not already installed)
 Install-WindowsFeature -Name Web-Server -IncludeManagementTools
 
-# Fetch complete system and hardware info
+# 2. Fetch system and hardware info
 $computer = Get-ComputerInfo
 $cpu = Get-CimInstance Win32_Processor
 $disk = Get-CimInstance Win32_LogicalDisk -Filter "DeviceID='C:'"
 
-# Format the system details into a clean HTML webpage
+# 3. Pre-calculate values to ensure clean HTML embedding
+$computerName = $computer.CsName
+$osName       = $computer.OsName
+$osVersion    = $computer.OsVersion
+$architecture = $computer.OsArchitecture
+$cpuModel     = $cpu.Name
+$totalMemory  = [Math]::Round($computer.CsTotalPhysicalMemory / 1GB, 2)
+$freeSpace    = [Math]::Round($disk.FreeSpace / 1GB, 2)
+$totalSpace   = [Math]::Round($disk.Size / 1GB, 2)
+
+# 4. Format the system details into a clean HTML webpage
 $html = @"
 <!DOCTYPE html>
 <html>
@@ -27,17 +37,20 @@ $html = @"
     <h2>Azure Windows VM - System Details</h2>
     <table>
         <tr><th>System Property</th><th>Value</th></tr>
-        <tr><td>Computer Name</td><td>$($computer.CsName)</td></tr>
-        <tr><td>Operating System</td><td>$($computer.OsName)</td></tr>
-        <tr><td>OS Version</td><td>$($computer.OsVersion)</td></tr>
-        <tr><td>Architecture</td><td>$($computer.OsArchitecture)</td></tr>
-        <tr><td>CPU Model</td><td>$($cpu.Name)</td></tr>
-        <tr><td>Total Memory</td><td>$([Math]::Round($computer.CsTotalPhysicalMemory / 1GB, 2)) GB</td></tr>
-        <tr><td>C: Drive Free Space</td><td>$([Math]::Round($disk.FreeSpace / 1GB, 2)) GB / $([Math]::Round($disk.Size / 1GB, 2)) GB</td></tr>
+        <tr><td>Computer Name</td><td>$computerName</td></tr>
+        <tr><td>Operating System</td><td>$osName</td></tr>
+        <tr><td>OS Version</td><td>$osVersion</td></tr>
+        <tr><td>Architecture</td><td>$architecture</td></tr>
+        <tr><td>CPU Model</td><td>$cpuModel</td></tr>
+        <tr><td>Total Memory</td><td>$totalMemory GB</td></tr>
+        <tr><td>C: Drive Free Space</td><td>$freeSpace GB / $totalSpace GB</td></tr>
     </table>
 </body>
 </html>
 "@
 
-# Overwrite the default IIS landing page
+# 5. Overwrite the default IIS landing page
 Set-Content -Path "C:\inetpub\wwwroot\index.html" -Value $html -Force
+
+# 6. Ensure the web service is running and listening on port 80
+Restart-Service w3svc

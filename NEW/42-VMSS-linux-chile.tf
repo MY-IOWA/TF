@@ -30,9 +30,6 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss-linux" {
     }
   }
 }
-
-
-
 resource "azurerm_lb" "lb-chilecentral" {
   name                = "LoadBalancer-chilecentral"
   location            = azurerm_resource_group.rg["chilecentral"].location
@@ -67,11 +64,11 @@ resource "azurerm_lb_rule" "lb_rule_chilecentral" {
   frontend_ip_configuration_name = azurerm_lb.lb-chilecentral.frontend_ip_configuration[0].name
   probe_id                       = azurerm_lb_probe.hp_chilecentral.id
 }
-resource "azurerm_route" "chile-mexico" {
-  name                   = "chile-mexico"
+resource "azurerm_route" "chile-india" {
+  name                   = "chile-india"
   resource_group_name    = azurerm_resource_group.rg["chilecentral"].name
   route_table_name       = azurerm_route_table.route_table["chilecentral"].name
-  address_prefix         = "10.6.0.0/16"
+  address_prefix         = "10.0.0.0/16"
   next_hop_type          = "VirtualAppliance"
   next_hop_in_ip_address = "10.5.0.4"
 }
@@ -91,19 +88,11 @@ resource "azurerm_route" "chile-africa" {
   next_hop_type          = "VirtualAppliance"
   next_hop_in_ip_address = "10.5.0.4"
 }
-resource "azurerm_route" "chile-australia" {
-  name                   = "chile-australia"
+resource "azurerm_route" "chile-mexico" {
+  name                   = "chile-mexico"
   resource_group_name    = azurerm_resource_group.rg["chilecentral"].name
   route_table_name       = azurerm_route_table.route_table["chilecentral"].name
-  address_prefix         = "10.7.0.0/16"
-  next_hop_type          = "VirtualAppliance"
-  next_hop_in_ip_address = "10.5.0.4"
-}
-resource "azurerm_route" "chile-india" {
-  name                   = "chile-india"
-  resource_group_name    = azurerm_resource_group.rg["chilecentral"].name
-  route_table_name       = azurerm_route_table.route_table["chilecentral"].name
-  address_prefix         = "10.0.0.0/16"
+  address_prefix         = "10.3.0.0/16"
   next_hop_type          = "VirtualAppliance"
   next_hop_in_ip_address = "10.5.0.4"
 }
@@ -112,6 +101,14 @@ resource "azurerm_route" "chile-korea" {
   resource_group_name    = azurerm_resource_group.rg["chilecentral"].name
   route_table_name       = azurerm_route_table.route_table["chilecentral"].name
   address_prefix         = "10.6.0.0/16"
+  next_hop_type          = "VirtualAppliance"
+  next_hop_in_ip_address = "10.5.0.4"
+}
+resource "azurerm_route" "chile-australia" {
+  name                   = "chile-australia"
+  resource_group_name    = azurerm_resource_group.rg["chilecentral"].name
+  route_table_name       = azurerm_route_table.route_table["chilecentral"].name
+  address_prefix         = "10.7.0.0/16"
   next_hop_type          = "VirtualAppliance"
   next_hop_in_ip_address = "10.5.0.4"
 }

@@ -1,5 +1,4 @@
 resource "azurerm_windows_virtual_machine_scale_set" "vmss-win" {
-  count               = 2
   name                = "vmss-win"
   resource_group_name = azurerm_resource_group.rg["swedencentral"].name
   location            = azurerm_resource_group.rg["swedencentral"].location
@@ -64,23 +63,6 @@ resource "azurerm_lb_rule" "lb_rule_swedencentral" {
   frontend_ip_configuration_name = azurerm_lb.lb-swedencentral.frontend_ip_configuration[0].name
   probe_id                       = azurerm_lb_probe.hp_swedencentral.id
 }
-
-resource "azurerm_route" "sweden-mexico" {
-  name                   = "sweden-mexico"
-  resource_group_name    = azurerm_resource_group.rg["swedencentral"].name
-  route_table_name       = azurerm_route_table.route_table["swedencentral"].name
-  address_prefix         = "10.6.0.0/16"
-  next_hop_type          = "VirtualAppliance"
-  next_hop_in_ip_address = "10.0.0.4"
-}
-resource "azurerm_route" "sweden-sweden" {
-  name                   = "sweden-sweden"
-  resource_group_name    = azurerm_resource_group.rg["swedencentral"].name
-  route_table_name       = azurerm_route_table.route_table["swedencentral"].name
-  address_prefix         = "10.1.0.0/16"
-  next_hop_type          = "VirtualAppliance"
-  next_hop_in_ip_address = "10.0.0.4"
-}
 resource "azurerm_route" "sweden-africa" {
   name                   = "sweden-africa"
   resource_group_name    = azurerm_resource_group.rg["swedencentral"].name
@@ -89,11 +71,19 @@ resource "azurerm_route" "sweden-africa" {
   next_hop_type          = "VirtualAppliance"
   next_hop_in_ip_address = "10.0.0.4"
 }
-resource "azurerm_route" "sweden-australia" {
-  name                   = "sweden-australia"
+resource "azurerm_route" "sweden-mexico" {
+  name                   = "sweden-mexico"
   resource_group_name    = azurerm_resource_group.rg["swedencentral"].name
   route_table_name       = azurerm_route_table.route_table["swedencentral"].name
-  address_prefix         = "10.7.0.0/16"
+  address_prefix         = "10.3.0.0/16"
+  next_hop_type          = "VirtualAppliance"
+  next_hop_in_ip_address = "10.0.0.4"
+}
+resource "azurerm_route" "sweden-chile" {
+  name                   = "sweden-chile"
+  resource_group_name    = azurerm_resource_group.rg["swedencentral"].name
+  route_table_name       = azurerm_route_table.route_table["swedencentral"].name
+  address_prefix         = "10.4.0.0/16"
   next_hop_type          = "VirtualAppliance"
   next_hop_in_ip_address = "10.0.0.4"
 }
@@ -110,6 +100,14 @@ resource "azurerm_route" "sweden-korea" {
   resource_group_name    = azurerm_resource_group.rg["swedencentral"].name
   route_table_name       = azurerm_route_table.route_table["swedencentral"].name
   address_prefix         = "10.6.0.0/16"
+  next_hop_type          = "VirtualAppliance"
+  next_hop_in_ip_address = "10.0.0.4"
+}
+resource "azurerm_route" "sweden-australia" {
+  name                   = "sweden-australia"
+  resource_group_name    = azurerm_resource_group.rg["swedencentral"].name
+  route_table_name       = azurerm_route_table.route_table["swedencentral"].name
+  address_prefix         = "10.7.0.0/16"
   next_hop_type          = "VirtualAppliance"
   next_hop_in_ip_address = "10.0.0.4"
 }

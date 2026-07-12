@@ -109,11 +109,11 @@ resource "azurerm_network_interface_backend_address_pool_association" "nic_lb_as
   ip_configuration_name   = "ipconfig1"
   backend_address_pool_id = azurerm_lb_backend_address_pool.backend_pool_mexicocentral.id
 }
-resource "azurerm_route" "mexico-chile" {
-  name                   = "mexico-chile"
+resource "azurerm_route" "mexico-india" {
+  name                   = "mexico-india"
   resource_group_name    = azurerm_resource_group.rg["mexicocentral"].name
   route_table_name       = azurerm_route_table.route_table["mexicocentral"].name
-  address_prefix         = "10.6.0.0/16"
+  address_prefix         = "10.0.0.0/16"
   next_hop_type          = "VirtualAppliance"
   next_hop_in_ip_address = "10.5.0.4"
 }
@@ -133,19 +133,11 @@ resource "azurerm_route" "mexico-africa" {
   next_hop_type          = "VirtualAppliance"
   next_hop_in_ip_address = "10.5.0.4"
 }
-resource "azurerm_route" "mexico-australia" {
-  name                   = "mexico-australia"
+resource "azurerm_route" "mexico-chile" {
+  name                   = "mexico-chile"
   resource_group_name    = azurerm_resource_group.rg["mexicocentral"].name
   route_table_name       = azurerm_route_table.route_table["mexicocentral"].name
-  address_prefix         = "10.7.0.0/16"
-  next_hop_type          = "VirtualAppliance"
-  next_hop_in_ip_address = "10.5.0.4"
-}
-resource "azurerm_route" "mexico-india" {
-  name                   = "mexico-india"
-  resource_group_name    = azurerm_resource_group.rg["mexicocentral"].name
-  route_table_name       = azurerm_route_table.route_table["mexicocentral"].name
-  address_prefix         = "10.0.0.0/16"
+  address_prefix         = "10.4.0.0/16"
   next_hop_type          = "VirtualAppliance"
   next_hop_in_ip_address = "10.5.0.4"
 }
@@ -154,6 +146,14 @@ resource "azurerm_route" "mexico-korea" {
   resource_group_name    = azurerm_resource_group.rg["mexicocentral"].name
   route_table_name       = azurerm_route_table.route_table["mexicocentral"].name
   address_prefix         = "10.6.0.0/16"
+  next_hop_type          = "VirtualAppliance"
+  next_hop_in_ip_address = "10.5.0.4"
+}
+resource "azurerm_route" "mexico-australia" {
+  name                   = "mexico-australia"
+  resource_group_name    = azurerm_resource_group.rg["mexicocentral"].name
+  route_table_name       = azurerm_route_table.route_table["mexicocentral"].name
+  address_prefix         = "10.7.0.0/16"
   next_hop_type          = "VirtualAppliance"
   next_hop_in_ip_address = "10.5.0.4"
 }

@@ -31,7 +31,7 @@ resource "azurerm_application_gateway" "india-app-gateway" {
   }
   backend_address_pool {
     name         = "backend-pool"
-    ip_addresses = ["10.1.0.100", "10.5.0.100", "10.6.0.100", "10.7.0.100"]
+    ip_addresses = ["10.1.0.100", "10.2.0.100", "10.3.0.100", "10.4.0.100"]
   }
   frontend_port {
     port = "80"

@@ -6,19 +6,20 @@ resource "azurerm_linux_virtual_machine" "linux" {
   location                        = azurerm_resource_group.rg[each.key].location
   size                            = "Standard_B2als_v2"
   admin_username                  = "mahesh"
-  admin_password                  = "Test@123user"
+  admin_password                  = data.azurerm_key_vault_secret.admin_password.value
   disable_password_authentication = false
   network_interface_ids = [
     azurerm_network_interface.nic[each.key].id,
   ]
+  custom_data = base64encode(file("${path.module}/ubuntu.sh"))
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
   source_image_reference {
-    publisher = "RedHat"
-    offer     = "RHEL"
-    sku       = "9-lvm-gen2"
+    publisher = "Canonical"
+    offer     = "ubuntu-24_04-lts"
+    sku       = "server"
     version   = "latest"
   }
 }
@@ -33,3 +34,4 @@ resource "azurerm_network_interface" "nic" {
     private_ip_address_allocation = "Dynamic"
   }
 }
+

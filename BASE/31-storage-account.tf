@@ -1,3 +1,4 @@
+/*
 resource "azurerm_storage_account" "st_name" {
   for_each                 = local.location_code
   name                     = lower(substr("storage${random_string.random6.result}${each.value}", 0, 20))
@@ -24,3 +25,4 @@ resource "azurerm_storage_blob" "blob1" {
   type                 = "Block"
   source_content       = "This is a sample blob content for ${local.naming_suffix}"
 }
+*/

@@ -1,3 +1,4 @@
+/*
 resource "azurerm_mssql_database" "database" {
   name         = "database1"
   server_id    = azurerm_mssql_server.sql.id
@@ -9,3 +10,4 @@ resource "azurerm_mssql_database" "database" {
     azurerm_mssql_server.sql
   ]
 }
+*/

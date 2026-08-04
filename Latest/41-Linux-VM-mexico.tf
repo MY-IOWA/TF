@@ -9,7 +9,6 @@ resource "azurerm_linux_virtual_machine" "RHEL" {
   network_interface_ids = [
     azurerm_network_interface.nic-RHEL.id,
   ]
-  custom_data = base64encode(file("${path.module}/RHEL.sh"))
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
@@ -46,7 +45,6 @@ resource "azurerm_linux_virtual_machine" "ubuntu" {
   network_interface_ids = [
     azurerm_network_interface.nic-ubuntu.id,
   ]
-  custom_data = base64encode(file("${path.module}/ubuntu.sh"))
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"

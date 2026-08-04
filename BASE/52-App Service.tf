@@ -1,3 +1,4 @@
+/*
 resource "azurerm_windows_web_app" "web-app-windows" {
   name                = "web-app-windows"
   resource_group_name = values(azurerm_resource_group.rg)[5].name
@@ -14,3 +15,4 @@ resource "azurerm_windows_web_app" "web-app-windows" {
     azurerm_service_plan.Service_plan_win
   ]
 }
+*/

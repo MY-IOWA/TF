@@ -1,6 +1,6 @@
 
 data "azurerm_key_vault" "kv" {
-  name                = "key-vault-admin"
+  name                = "rsvmkcanada"
   resource_group_name = "Main"
 }
 data "azurerm_key_vault_secret" "admin_password" {

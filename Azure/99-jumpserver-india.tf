@@ -7,7 +7,7 @@ resource "azurerm_windows_virtual_machine" "jumpserver" {
   eviction_policy     = "Deallocate"
   max_bid_price       = -1
   admin_username      = "mahesh"
-  admin_password      = "Test@123user"
+  admin_password      = data.azurerm_key_vault_secret.admin_password.value
   network_interface_ids = [
     azurerm_network_interface.nic-jumpserver.id,
   ]

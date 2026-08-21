@@ -5,11 +5,10 @@ resource "azurerm_windows_virtual_machine" "virtual_appliance" {
   location            = azurerm_resource_group.rg["japanwest"].location
   size                = "Standard_B2als_v2"
   admin_username      = "mahesh"
-  admin_password      = "Test@123user"
+  admin_password      = data.azurerm_key_vault_secret.admin_password.value
   network_interface_ids = [
     azurerm_network_interface.nic-virtual-appliance.id,
   ]
-  custom_data = filebase64("${path.module}/IIS.ps1")
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
@@ -33,3 +32,4 @@ resource "azurerm_network_interface" "nic-virtual-appliance" {
     private_ip_address            = "10.5.0.4"
   }
 }
+# Set-Service -Name RemoteAccess -StartupType Automatic; Start-Service -Name RemoteAccess; Get-Service -Name RemoteAccess

@@ -28,3 +28,5 @@ HTML
 # Ensure nginx starts automatically
 sudo systemctl enable nginx
 sudo systemctl start nginx
+sudo sysctl -w net.ipv4.icmp_echo_ignore_all=0
+

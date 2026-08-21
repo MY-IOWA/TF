@@ -5,7 +5,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss-linux" {
   sku                             = "Standard_B2als_v2"
   instances                       = 2
   admin_username                  = "mahesh"
-  admin_password                  = "Test@123user"
+  admin_password                  = data.azurerm_key_vault_secret.admin_password.value
   disable_password_authentication = false
   custom_data                     = base64encode(file("${path.module}/ubuntu.sh"))
   source_image_reference {

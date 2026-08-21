@@ -5,8 +5,7 @@ resource "azurerm_windows_virtual_machine_scale_set" "vmss-win" {
   instances           = 2
   sku                 = "Standard_B2als_v2"
   admin_username      = "mahesh"
-  admin_password      = "Test@123user"
-  custom_data         = filebase64("${path.module}/IIS.ps1")
+  admin_password      = data.azurerm_key_vault_secret.admin_password.value
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
@@ -22,46 +21,11 @@ resource "azurerm_windows_virtual_machine_scale_set" "vmss-win" {
     primary = true
 
     ip_configuration {
-      name                                   = "ipconfig1"
-      primary                                = true
-      subnet_id                              = azurerm_subnet.subnet["swedencentral"].id
-      load_balancer_backend_address_pool_ids = [azurerm_lb_backend_address_pool.backend_pool_swedencentral.id]
+      name      = "ipconfig1"
+      primary   = true
+      subnet_id = azurerm_subnet.subnet["swedencentral"].id
     }
   }
-}
-resource "azurerm_lb" "lb-swedencentral" {
-  name                = "LoadBalancer-swedencentral"
-  location            = azurerm_resource_group.rg["swedencentral"].location
-  resource_group_name = azurerm_resource_group.rg["swedencentral"].name
-  sku                 = "Standard"
-
-  frontend_ip_configuration {
-    name                          = "LoadBalancerFrontEnd"
-    private_ip_address_allocation = "Static"
-    private_ip_address            = "10.1.0.100"
-    subnet_id                     = azurerm_subnet.subnet["swedencentral"].id
-  }
-}
-resource "azurerm_lb_backend_address_pool" "backend_pool_swedencentral" {
-  name            = "BackendPool"
-  loadbalancer_id = azurerm_lb.lb-swedencentral.id
-}
-resource "azurerm_lb_probe" "hp_swedencentral" {
-  name                = "HealthProbe"
-  loadbalancer_id     = azurerm_lb.lb-swedencentral.id
-  protocol            = "Tcp"
-  port                = 80
-  interval_in_seconds = 5
-  number_of_probes    = 2
-}
-resource "azurerm_lb_rule" "lb_rule_swedencentral" {
-  name                           = "LoadBalancerRule"
-  loadbalancer_id                = azurerm_lb.lb-swedencentral.id
-  protocol                       = "Tcp"
-  frontend_port                  = 80
-  backend_port                   = 80
-  frontend_ip_configuration_name = azurerm_lb.lb-swedencentral.frontend_ip_configuration[0].name
-  probe_id                       = azurerm_lb_probe.hp_swedencentral.id
 }
 resource "azurerm_route" "sweden-africa" {
   name                   = "sweden-africa"

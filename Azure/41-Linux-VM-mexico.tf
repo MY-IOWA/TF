@@ -4,7 +4,7 @@ resource "azurerm_linux_virtual_machine" "RHEL" {
   location                        = azurerm_resource_group.rg["mexicocentral"].location
   size                            = "Standard_B2als_v2"
   admin_username                  = "mahesh"
-  admin_password                  = "Test@123user"
+  admin_password                  = data.azurerm_key_vault_secret.admin_password.value
   disable_password_authentication = false
   network_interface_ids = [
     azurerm_network_interface.nic-RHEL.id,
@@ -40,7 +40,7 @@ resource "azurerm_linux_virtual_machine" "ubuntu" {
   location                        = azurerm_resource_group.rg["mexicocentral"].location
   size                            = "Standard_B2als_v2"
   admin_username                  = "mahesh"
-  admin_password                  = "Test@123user"
+  admin_password                  = data.azurerm_key_vault_secret.admin_password.value
   disable_password_authentication = false
   network_interface_ids = [
     azurerm_network_interface.nic-ubuntu.id,
@@ -70,51 +70,6 @@ resource "azurerm_network_interface" "nic-ubuntu" {
     subnet_id                     = azurerm_subnet.subnet["mexicocentral"].id
     private_ip_address_allocation = "Dynamic"
   }
-}
-resource "azurerm_lb" "lb-mexicocentral" {
-  name                = "LoadBalancer-mexicocentral"
-  location            = azurerm_resource_group.rg["mexicocentral"].location
-  resource_group_name = azurerm_resource_group.rg["mexicocentral"].name
-  sku                 = "Standard"
-
-  frontend_ip_configuration {
-    name                          = "LoadBalancerFrontEnd"
-    private_ip_address_allocation = "Static"
-    private_ip_address            = "10.3.0.100"
-    subnet_id                     = azurerm_subnet.subnet["mexicocentral"].id
-  }
-  depends_on = [azurerm_linux_virtual_machine.RHEL, azurerm_linux_virtual_machine.ubuntu]
-}
-resource "azurerm_lb_backend_address_pool" "backend_pool_mexicocentral" {
-  name            = "BackendPool"
-  loadbalancer_id = azurerm_lb.lb-mexicocentral.id
-}
-resource "azurerm_lb_probe" "hp_mexicocentral" {
-  name                = "HealthProbe"
-  loadbalancer_id     = azurerm_lb.lb-mexicocentral.id
-  protocol            = "Tcp"
-  port                = 80
-  interval_in_seconds = 5
-  number_of_probes    = 2
-}
-resource "azurerm_lb_rule" "lb_rule_mexicocentral" {
-  name                           = "LoadBalancerRule"
-  loadbalancer_id                = azurerm_lb.lb-mexicocentral.id
-  protocol                       = "Tcp"
-  frontend_port                  = 80
-  backend_port                   = 80
-  frontend_ip_configuration_name = azurerm_lb.lb-mexicocentral.frontend_ip_configuration[0].name
-  probe_id                       = azurerm_lb_probe.hp_mexicocentral.id
-}
-resource "azurerm_network_interface_backend_address_pool_association" "nic_lb_association-RHEL" {
-  network_interface_id    = azurerm_network_interface.nic-RHEL.id
-  ip_configuration_name   = "ipconfig1"
-  backend_address_pool_id = azurerm_lb_backend_address_pool.backend_pool_mexicocentral.id
-}
-resource "azurerm_network_interface_backend_address_pool_association" "nic_lb_association_ubuntu" {
-  network_interface_id    = azurerm_network_interface.nic-ubuntu.id
-  ip_configuration_name   = "ipconfig1"
-  backend_address_pool_id = azurerm_lb_backend_address_pool.backend_pool_mexicocentral.id
 }
 resource "azurerm_route" "mexico-india" {
   name                   = "mexico-india"

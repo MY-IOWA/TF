@@ -1,0 +1,21 @@
+#Install IIS 
+Install-WindowsFeature -name Web-Server -IncludeManagementTools
+
+#Ping
+New-NetFirewallRule -DisplayName "Allow Ping Public" -Direction Inbound -Protocol ICMPv4 -IcmpType 8 -Action Allow -Profile Public -Enabled True
+# Set Timezone to Central
+Set-TimeZone -Name "Central Standard Time"
+# Print Hostname & IP Address to IIS htm file
+$outputFile = "C:\inetpub\wwwroot\iisstart.htm" # Specify your desired file path
+
+"Hostname: $env:COMPUTERNAME" | Out-File -FilePath $outputFile
+"IP Addresses:" | Out-File -Append -FilePath $outputFile
+
+Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.IPAddress -ne "127.0.0.1" -and $_.AddressState -eq "Preferred" } | Select-Object -ExpandProperty IPAddress | Out-File -Append -FilePath $outputFile
+
+"--- Done ---" | Out-File -Append -FilePath $outputFile
+# Enable PowerShell Remoting and configure firewall rules
+Enable-PSRemoting -Force
+
+# Set the WinRM service startup type to Automatic and start the service
+Set-Service -Name WinRM -StartupType Automatic -Status Running

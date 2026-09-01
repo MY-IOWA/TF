@@ -3,6 +3,9 @@ resource "azurerm_linux_virtual_machine" "RHEL" {
   resource_group_name             = azurerm_resource_group.rg["mexicocentral"].name
   location                        = azurerm_resource_group.rg["mexicocentral"].location
   size                            = "Standard_B2als_v2"
+  priority                        = "Spot"
+  eviction_policy                 = "Deallocate"
+  max_bid_price                   = -1
   admin_username                  = "mahesh"
   admin_password                  = data.azurerm_key_vault_secret.admin_password.value
   disable_password_authentication = false
@@ -33,7 +36,7 @@ resource "azurerm_network_interface" "nic-RHEL" {
     subnet_id                     = azurerm_subnet.subnet["mexicocentral"].id
     private_ip_address_allocation = "Dynamic"
   }
-}
+} /*
 resource "azurerm_linux_virtual_machine" "ubuntu" {
   name                            = "ubuntuvm-mexicocentral"
   resource_group_name             = azurerm_resource_group.rg["mexicocentral"].name
@@ -71,6 +74,7 @@ resource "azurerm_network_interface" "nic-ubuntu" {
     private_ip_address_allocation = "Dynamic"
   }
 }
+*/
 resource "azurerm_route" "mexico-india" {
   name                   = "mexico-india"
   resource_group_name    = azurerm_resource_group.rg["mexicocentral"].name

@@ -1,3 +1,4 @@
+/*
 resource "azurerm_windows_virtual_machine" "win" {
   count               = 2
   name                = "winvm-${count.index}"
@@ -76,6 +77,7 @@ resource "azurerm_network_interface_backend_address_pool_association" "nic_lb_as
   ip_configuration_name   = "ipconfig1"
   backend_address_pool_id = azurerm_lb_backend_address_pool.backend_pool_southafricanorth.id
 }
+*/
 resource "azurerm_route" "africa-sweden" {
   name                   = "africa-sweden"
   resource_group_name    = azurerm_resource_group.rg["southafricanorth"].name

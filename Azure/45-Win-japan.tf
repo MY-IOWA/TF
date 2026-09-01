@@ -1,6 +1,6 @@
 
 resource "azurerm_windows_virtual_machine" "virtual_appliance" {
-  name                = "virtual-app"
+  name                = "Win-virtual-app"
   resource_group_name = azurerm_resource_group.rg["japanwest"].name
   location            = azurerm_resource_group.rg["japanwest"].location
   size                = "Standard_B2als_v2"

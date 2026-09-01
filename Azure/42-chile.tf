@@ -1,3 +1,4 @@
+/*
 resource "azurerm_linux_virtual_machine_scale_set" "vmss-linux" {
   name                            = "vmss-lin"
   location                        = azurerm_resource_group.rg["chilecentral"].location
@@ -64,6 +65,7 @@ resource "azurerm_lb_rule" "lb_rule_chilecentral" {
   frontend_ip_configuration_name = azurerm_lb.lb-chilecentral.frontend_ip_configuration[0].name
   probe_id                       = azurerm_lb_probe.hp_chilecentral.id
 }
+*/
 resource "azurerm_route" "chile-india" {
   name                   = "chile-india"
   resource_group_name    = azurerm_resource_group.rg["chilecentral"].name

@@ -3,7 +3,6 @@ output "naming_suffix" {
   description = "The generated naming suffix based on the first location's business unit and environment."
   sensitive   = true
 }
-/*
 output "location_code_map" {
   value       = local.location_code
   description = "A map of Azure locations to their corresponding codes."
@@ -16,4 +15,3 @@ output "storage_account_names" {
   value       = { for loc in local.location : loc.location => "st${random_string.random8.result}${loc.location}" }
   description = "A map of Azure locations to their corresponding storage account names."
 }
-*/

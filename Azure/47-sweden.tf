@@ -1,3 +1,4 @@
+/*
 resource "azurerm_windows_virtual_machine_scale_set" "vmss-win" {
   name                = "vmss-win"
   resource_group_name = azurerm_resource_group.rg["swedencentral"].name
@@ -27,6 +28,7 @@ resource "azurerm_windows_virtual_machine_scale_set" "vmss-win" {
     }
   }
 }
+*/
 resource "azurerm_route" "sweden-africa" {
   name                   = "sweden-africa"
   resource_group_name    = azurerm_resource_group.rg["swedencentral"].name

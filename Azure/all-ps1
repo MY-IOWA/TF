@@ -23,3 +23,7 @@ Set-Service -Name WinRM -StartupType Automatic -Status Running
 # Install Visual Basic.
 winget install --id Microsoft.VisualStudio.2022.Community --override "--passive --wait --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NetWeb --includeRecommended" --accept-source-agreements --accept-package-agreements
 
+$Path = "$env:TEMP\chrome_installer.exe"
+Invoke-WebRequest -Uri "https://google.com" -OutFile $Path
+Start-Process -FilePath $Path -ArgumentList "/silent /install" -Wait
+Remove-Item -Path $Path

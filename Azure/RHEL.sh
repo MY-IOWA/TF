@@ -1,15 +1,18 @@
 #!/bin/bash
-# Update system packages and install Apache
-sudo dnf update -y
-sudo dnf install -y httpd
+# 1. Clean cache and install Apache (skipping broken repos if needed)
+sudo dnf clean all
+sudo dnf install -y httpd --setopt=skip_if_unavailable=True
 
-# Gather system details
+# 2. Force create the web directory to prevent "No such file or directory" errors
+sudo mkdir -p /var/www/html
+
+# 3. Gather system details
 HOSTNAME=$(hostname)
 IP_ADDR=$(hostname -I | awk '{print $1}')
 OS_INFO=$(cat /etc/os-release | grep PRETTY_NAME | cut -d '"' -f 2)
 
-# Create custom landing page in the RHEL web directory
-cat <<HTML > /var/www/html/index.html
+# 4. Create custom landing page
+sudo tee /var/www/html/index.html > /dev/null <<HTML
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,12 +28,14 @@ cat <<HTML > /var/www/html/index.html
 </html>
 HTML
 
-# Configure firewall to allow HTTP traffic locally if needed
-sudo firewall-cmd --permanent --add-service=http
-sudo firewall-cmd --reload
+# 5. Fix permissions for the web directory
+sudo chown -R apache:apache /var/www/html
+sudo chmod -R 755 /var/www/html
 
-# Start and enable the Apache service
+# 6. Configure firewall to allow HTTP traffic (ignoring errors if firewalld is not active)
+sudo firewall-cmd --permanent --add-service=http 2>/dev/null && sudo firewall-cmd --reload 2>/dev/null
+
+# 7. Start and enable the Apache service
 sudo systemctl enable httpd
 sudo systemctl start httpd
 sudo sysctl -w net.ipv4.icmp_echo_ignore_all=0
-

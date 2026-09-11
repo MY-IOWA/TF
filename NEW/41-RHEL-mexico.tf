@@ -20,6 +20,7 @@ resource "azurerm_linux_virtual_machine" "RHEL" {
     sku       = "9-lvm-gen2"
     version   = "latest"
   }
+  custom_data = filebase64("${path.module}/RHEL.sh")
 }
 resource "azurerm_network_interface_security_group_association" "rhelnic-association" {
   count                     = 2
